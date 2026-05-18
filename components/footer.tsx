@@ -59,7 +59,7 @@ export function Footer() {
           whileInView={{ scaleX: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 1, delay: 0.3 }}
-          className="mx-auto mt-8 h-[1px] w-32 origin-center"
+          className="mx-auto mt-8 h-px w-32 origin-center"
           style={{ backgroundColor: '#ff4fd8' }}
         />
       </div>

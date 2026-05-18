@@ -161,7 +161,7 @@ export function Navigation() {
 
         {/* Scroll progress bar */}
         <motion.div
-          className="absolute bottom-0 left-0 h-[1px] origin-left"
+          className="absolute bottom-0 left-0 h-px origin-left"
           style={{
             backgroundColor: "#ff4fd8",
             scaleX: scrollYProgress,
@@ -194,7 +194,7 @@ export function Navigation() {
               animate={{ scale: 1, opacity: 0.1 }}
               exit={{ scale: 0, opacity: 0 }}
               transition={{ duration: 0.5 }}
-              className="absolute left-1/2 top-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full"
+              className="absolute left-1/2 top-1/2 h-150 w-150 -translate-x-1/2 -translate-y-1/2 rounded-full"
               style={{ background: "radial-gradient(circle, #ff4fd8 0%, transparent 70%)" }}
             />
 
@@ -219,7 +219,7 @@ export function Navigation() {
                     {item.name}
                   </span>
                   <motion.span
-                    className="absolute -bottom-1 left-0 h-[3px] w-full origin-left"
+                    className="absolute -bottom-1 left-0 h-0.75 w-full origin-left"
                     style={{ backgroundColor: "#ff4fd8" }}
                     initial={{ scaleX: 0 }}
                     whileHover={{ scaleX: 1 }}

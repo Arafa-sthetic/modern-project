@@ -65,7 +65,7 @@ export function MagneticCursor() {
 
       {/* Trailing dot */}
       <motion.div
-        className="pointer-events-none fixed left-0 top-0 z-[9998] hidden md:block"
+        className="pointer-events-none fixed left-0 top-0 z-9998 hidden md:block"
         style={{
           x: cursorX,
           y: cursorY,

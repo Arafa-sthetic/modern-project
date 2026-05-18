@@ -36,7 +36,7 @@ export function Preloader({ onComplete }: PreloaderProps) {
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
-          className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-background"
+          className="fixed inset-0 z-100 flex flex-col items-center justify-center bg-background"
         >
           {/* Background text */}
           <div className="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden">
@@ -96,7 +96,7 @@ export function Preloader({ onComplete }: PreloaderProps) {
               transition={{ delay: 0.3, duration: 0.6 }}
             />
             <motion.div
-              className="absolute left-0 top-0 h-full w-[2px] origin-top"
+              className="absolute left-0 top-0 h-full w-0.5 origin-top"
               style={{ backgroundColor: '#ff4fd8' }}
               initial={{ scaleY: 0 }}
               animate={{ scaleY: 1 }}
@@ -112,7 +112,7 @@ export function Preloader({ onComplete }: PreloaderProps) {
               transition={{ delay: 0.3, duration: 0.6 }}
             />
             <motion.div
-              className="absolute bottom-0 right-0 h-full w-[2px] origin-bottom"
+              className="absolute bottom-0 right-0 h-full w-0.5 origin-bottom"
               style={{ backgroundColor: '#ff4fd8' }}
               initial={{ scaleY: 0 }}
               animate={{ scaleY: 1 }}

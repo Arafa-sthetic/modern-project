@@ -185,7 +185,7 @@ export function AboutSection() {
               className="relative"
             >
               {/* Profile image area with advanced effects */}
-              <div className="group relative mb-8 aspect-[4/5] overflow-hidden rounded-2xl border border-foreground/10 bg-foreground/2">
+              <div className="group relative mb-8 aspect-4/5 overflow-hidden rounded-2xl border border-foreground/10 bg-foreground/2">
                 {/* Animated corner accents */}
                 <motion.div
                   initial={{ opacity: 0 }}

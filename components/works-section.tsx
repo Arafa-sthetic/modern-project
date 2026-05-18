@@ -117,7 +117,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
       data-magnetic="true"
     >
       <motion.div
-        className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-border/30 bg-secondary/30 backdrop-blur-sm transition-all duration-700"
+        className="relative aspect-4/3 overflow-hidden rounded-2xl border border-border/30 bg-secondary/30 backdrop-blur-sm transition-all duration-700"
         style={{ transform: "translateZ(75px)" }}
         whileHover={{ scale: 1.02 }}
       >
@@ -213,7 +213,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
         {/* Content overlay */}
         <div className="absolute inset-0 flex flex-col justify-end p-6">
           <div
-            className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent"
+            className="absolute inset-0 bg-linear-to-t from-background via-background/60 to-transparent"
           />
 
           <div className="relative z-10">
@@ -320,7 +320,7 @@ export function WorksSection() {
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ duration: 1 }}
-          className="absolute right-0 top-0 h-[600px] w-[600px] -translate-y-1/2 translate-x-1/2 rounded-full opacity-10 blur-3xl"
+          className="absolute right-0 top-0 h-150 w-150 -translate-y-1/2 translate-x-1/2 rounded-full opacity-10 blur-3xl"
           style={{ background: "radial-gradient(circle, #ff4fd8 0%, transparent 70%)" }}
         />
       </div>
@@ -338,7 +338,7 @@ export function WorksSection() {
               initial={{ width: 0 }}
               animate={isInView ? { width: 60 } : {}}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="h-[1px]"
+              className="h-px"
               style={{ backgroundColor: "#ff4fd8" }}
             />
             <span className="font-mono text-xs uppercase tracking-[0.3em] text-muted-foreground">
