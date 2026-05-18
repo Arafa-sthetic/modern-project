@@ -87,7 +87,7 @@ export function Navigation() {
                 </span>
                 {/* Active/hover indicator */}
                 <motion.span
-                  className="absolute bottom-1 left-4 right-4 h-[2px] rounded-full"
+                  className="absolute bottom-1 left-4 right-4 h-0.5 rounded-full"
                   style={{ backgroundColor: "#ff4fd8" }}
                   initial={{ scaleX: 0 }}
                   animate={{ scaleX: activeSection === item.href.slice(1) ? 1 : 0 }}
@@ -125,7 +125,7 @@ export function Navigation() {
 
         {/* Scroll progress bar */}
         <motion.div
-          className="absolute bottom-0 left-0 h-[1px] origin-left"
+          className="absolute bottom-0 left-0 h-px origin-left"
           style={{
             backgroundColor: "#ff4fd8",
             scaleX: scrollYProgress,
