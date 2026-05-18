@@ -1,8 +1,13 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+// 🛑 Next.js এর usePathname ইমপোর্ট করলাম কারেন্ট পেজ ট্র্যাক করার জন্য
+import { usePathname } from "next/navigation";
 
 export default function CustomCursor() {
+  const pathname = usePathname(); // 📍 কারেন্ট ইউআরএল পাথ নেবে (যেমন: "/", "/about", ইত্যাদি)
+  const isHomePage = pathname === "/"; // 🎯 চেক করছে এটা মেইন হোম পেজ কিনা
+
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [visible, setVisible] = useState(false);
   const [clicked, setClicked] = useState(false);
@@ -11,6 +16,9 @@ export default function CustomCursor() {
   const clickSound = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
+    // 🛑 যদি হোম পেজ না হয়, তাহলে মাউস ট্র্যাকিং লিসেনারগুলো অ্যাডই হবে না
+    if (!isHomePage) return;
+
     // Load sound from public folder
     clickSound.current = new Audio("/sounds/click.mp3");
 
@@ -33,7 +41,6 @@ export default function CustomCursor() {
     };
 
     const handleMouseUp = () => setClicked(false);
-
     const handleHide = () => setVisible(false);
 
     window.addEventListener("mousemove", moveCursor);
@@ -47,13 +54,16 @@ export default function CustomCursor() {
       window.removeEventListener("mouseup", handleMouseUp);
       window.removeEventListener("mouseleave", handleHide);
     };
-  }, []);
+  }, [isHomePage]); // 🛑 ডিপেনডেন্সি হিসেবে ইকোনমিতে রাখা হলো
+
+  // 🛑 যদি ইউজার হোম পেজ ছাড়া অন্য কোনো পেজে থাকে, তাহলে পুরো কম্পোনেন্টটাই নাল (Null) রিটার্ন করবে
+  if (!isHomePage) return null;
 
   return (
     <>
-      {/* Hide default cursor */}
+      {/* Hide default cursor - শুধু হোম পেজে স্টাইলটা ইনজেক্ট হবে */}
       <style>
-        {`* { cursor: none; }`}
+        {`* { cursor: none !important; }`}
       </style>
 
       {/* Cursor Container */}
