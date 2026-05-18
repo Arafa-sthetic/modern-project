@@ -1,10 +1,9 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion"
+import { motion, useScroll, useTransform } from "framer-motion"
 
 export function Navigation() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState("")
   const { scrollYProgress } = useScroll()
   const opacity = useTransform(scrollYProgress, [0, 0.05], [0, 1])
@@ -88,7 +87,7 @@ export function Navigation() {
                 </span>
                 {/* Active/hover indicator */}
                 <motion.span
-                  className="absolute bottom-1 left-4 right-4 h-0.5 rounded-full"
+                  className="absolute bottom-1 left-4 right-4 h-[2px] rounded-full"
                   style={{ backgroundColor: "#ff4fd8" }}
                   initial={{ scaleX: 0 }}
                   animate={{ scaleX: activeSection === item.href.slice(1) ? 1 : 0 }}
@@ -122,46 +121,11 @@ export function Navigation() {
             </motion.a>
           </div>
 
-          {/* Mobile menu button */}
-          <motion.button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="relative z-50 flex h-10 w-10 flex-col items-center justify-center gap-1.5 md:hidden"
-            data-magnetic="true"
-            whileTap={{ scale: 0.9 }}
-            aria-label="Toggle menu"
-          >
-            <motion.span
-              animate={{
-                rotate: isMenuOpen ? 45 : 0,
-                y: isMenuOpen ? 6 : 0,
-                backgroundColor: isMenuOpen ? "#ff4fd8" : "currentColor",
-              }}
-              transition={{ duration: 0.3 }}
-              className="h-0.5 w-6"
-            />
-            <motion.span
-              animate={{
-                opacity: isMenuOpen ? 0 : 1,
-                scaleX: isMenuOpen ? 0 : 1,
-              }}
-              transition={{ duration: 0.3 }}
-              className="h-0.5 w-6 bg-current"
-            />
-            <motion.span
-              animate={{
-                rotate: isMenuOpen ? -45 : 0,
-                y: isMenuOpen ? -6 : 0,
-                backgroundColor: isMenuOpen ? "#ff4fd8" : "currentColor",
-              }}
-              transition={{ duration: 0.3 }}
-              className="h-0.5 w-6"
-            />
-          </motion.button>
         </nav>
 
         {/* Scroll progress bar */}
         <motion.div
-          className="absolute bottom-0 left-0 h-px origin-left"
+          className="absolute bottom-0 left-0 h-[1px] origin-left"
           style={{
             backgroundColor: "#ff4fd8",
             scaleX: scrollYProgress,
@@ -170,106 +134,6 @@ export function Navigation() {
         />
       </motion.header>
 
-      {/* Mobile menu overlay */}
-      <AnimatePresence>
-        {isMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 md:hidden"
-          >
-            {/* Background blur overlay */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="absolute inset-0 bg-background/95 backdrop-blur-xl"
-            />
-
-            {/* Decorative elements */}
-            <motion.div
-              initial={{ scale: 0, opacity: 0 }}
-              animate={{ scale: 1, opacity: 0.1 }}
-              exit={{ scale: 0, opacity: 0 }}
-              transition={{ duration: 0.5 }}
-              className="absolute left-1/2 top-1/2 h-150 w-150 -translate-x-1/2 -translate-y-1/2 rounded-full"
-              style={{ background: "radial-gradient(circle, #ff4fd8 0%, transparent 70%)" }}
-            />
-
-            {/* Nav items */}
-            <div className="relative flex h-full flex-col items-center justify-center gap-8">
-              {navItems.map((item, index) => (
-                <motion.a
-                  key={item.name}
-                  href={item.href}
-                  onClick={() => setIsMenuOpen(false)}
-                  initial={{ opacity: 0, y: 40, rotateX: -90 }}
-                  animate={{ opacity: 1, y: 0, rotateX: 0 }}
-                  exit={{ opacity: 0, y: -40 }}
-                  transition={{
-                    delay: index * 0.1,
-                    duration: 0.5,
-                    ease: [0.16, 1, 0.3, 1],
-                  }}
-                  className="group relative overflow-hidden"
-                >
-                  <span className="text-4xl font-bold uppercase tracking-tight transition-colors hover:text-[#ff4fd8] md:text-5xl">
-                    {item.name}
-                  </span>
-                  <motion.span
-                    className="absolute -bottom-1 left-0 h-0.75 w-full origin-left"
-                    style={{ backgroundColor: "#ff4fd8" }}
-                    initial={{ scaleX: 0 }}
-                    whileHover={{ scaleX: 1 }}
-                    transition={{ duration: 0.3 }}
-                  />
-                </motion.a>
-              ))}
-
-              {/* CTA */}
-              <motion.a
-                href="#contact"
-                onClick={() => setIsMenuOpen(false)}
-                initial={{ opacity: 0, y: 40 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0 }}
-                transition={{ delay: 0.3, duration: 0.5 }}
-                className="mt-8 rounded-full px-10 py-4 font-mono text-sm uppercase tracking-wider text-background"
-                style={{
-                  backgroundColor: "#ff4fd8",
-                  boxShadow: "0 0 40px rgba(255, 79, 216, 0.4)",
-                }}
-              >
-                Hire Me
-              </motion.a>
-
-              {/* Social links in mobile menu */}
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ delay: 0.4 }}
-                className="mt-8 flex gap-6"
-              >
-                {["GH", "TW", "LI"].map((social, index) => (
-                  <motion.a
-                    key={social}
-                    href="#"
-                    initial={{ opacity: 0, scale: 0 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 0.5 + index * 0.1 }}
-                    className="flex h-10 w-10 items-center justify-center rounded-full border border-border/50 font-mono text-xs transition-all hover:border-[#ff4fd8] hover:text-[#ff4fd8]"
-                  >
-                    {social}
-                  </motion.a>
-                ))}
-              </motion.div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </>
   )
 }
