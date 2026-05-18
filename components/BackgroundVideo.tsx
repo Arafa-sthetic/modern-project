@@ -25,6 +25,25 @@ export default function BackgroundVideo() {
     };
 
     playVideo();
+
+    // MOBILE BLACK FLASH FIX
+    const handleVisibility = () => {
+      if (document.visibilityState === "visible") {
+        video.play().catch(() => {});
+      }
+    };
+
+    document.addEventListener(
+      "visibilitychange",
+      handleVisibility
+    );
+
+    return () => {
+      document.removeEventListener(
+        "visibilitychange",
+        handleVisibility
+      );
+    };
   }, []);
 
   const toggleMute = async () => {
@@ -52,7 +71,7 @@ export default function BackgroundVideo() {
 
   return (
     <>
-      {/* ORIGINAL VIDEO */}
+      {/* VIDEO */}
       <video
         ref={videoRef}
         autoPlay
@@ -62,12 +81,20 @@ export default function BackgroundVideo() {
         preload="auto"
         className="
           fixed
-          inset-0
+          top-0
+          left-0
           z-0
-          h-full
-          w-full
+          h-screen
+          w-screen
           object-cover
+          pointer-events-none
         "
+        style={{
+          transform: "translateZ(0)",
+          backfaceVisibility: "hidden",
+          WebkitBackfaceVisibility: "hidden",
+          willChange: "transform",
+        }}
       >
         <source src="/videos/bg-tree.mp4" type="video/mp4" />
       </video>
@@ -79,7 +106,7 @@ export default function BackgroundVideo() {
           fixed
           bottom-6
           right-6
-          z-9999999
+          z-[999999]
           flex
           h-16
           w-16
