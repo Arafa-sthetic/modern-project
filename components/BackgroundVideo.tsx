@@ -73,22 +73,23 @@ export default function BackgroundVideo() {
     <>
       {/* VIDEO */}
       <video
-      ref={videoRef}
-      autoPlay
-      loop
-      muted
-      playsInline
-      className="
-        fixed
-        inset-0
-        z-0
-        h-full
-        w-full
-        object-cover
-        pointer-events-none
-      "
+        ref={videoRef}
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="auto"
+        className="
+          fixed
+          inset-0
+          z-0
+          h-screen
+          w-screen
+          object-cover
+          pointer-events-none
+        "
         style={{
-          transform: "translateZ(0)",
+          transform: "translate3d(0,0,0)",
           backfaceVisibility: "hidden",
           WebkitBackfaceVisibility: "hidden",
           willChange: "transform",

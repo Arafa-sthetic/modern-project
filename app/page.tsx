@@ -51,7 +51,7 @@ export default function HomePage() {
   );
 
   return (
-    <div className="relative z-10 min-h-[400vh] overflow-hidden bg-transparent text-white">
+    <div className="relative z-10 min-h-[400vh] bg-transparent text-white">
 
       {/* HERO SECTION */}
       <section className="sticky top-0 z-10 flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 lg:px-24">

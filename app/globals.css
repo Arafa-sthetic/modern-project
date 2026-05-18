@@ -272,3 +272,6 @@
     }
   }
 }
+video {
+  contain: layout paint size style;
+}
