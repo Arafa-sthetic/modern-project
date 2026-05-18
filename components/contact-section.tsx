@@ -47,18 +47,18 @@ export function ContactSection() {
   ]
 
   return (
-    <section id="contact" ref={sectionRef} className="relative min-h-screen overflow-hidden px-6 py-32">
-      {/* Animated background text */}
+    <section id="contact" ref={sectionRef} className="relative min-h-screen overflow-hidden px-6 py-32 bg-background">
+      {/* 🛠️ Fixed background text layer: Added -z-10 and fixed typography error */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={isInView ? { opacity: 1 } : {}}
         transition={{ duration: 1 }}
-        className="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden"
+        className="pointer-events-none absolute inset-0 -z-10 flex items-center justify-center overflow-hidden"
       >
         <motion.span
-          animate={{ x: [0, -50, 0] }}
-          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          className="whitespace-nowrap font-mono text-[15vw] font-black uppercase tracking-tighter text-foreground/2]"
+          animate={{ x: [0, -100, 0] }}
+          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+          className="whitespace-nowrap font-mono text-[14vw] font-black uppercase tracking-tighter text-foreground/5 opacity-40 select-none"
         >
           {"LET'S TALK • LET'S TALK • LET'S TALK •"}
         </motion.span>
@@ -68,23 +68,24 @@ export function ContactSection() {
       <motion.div
         animate={{ y: [0, -30, 0], scale: [1, 1.1, 1] }}
         transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-        className="pointer-events-none absolute right-0 top-1/4 h-96 w-96 rounded-full opacity-20 blur-3xl"
+        className="pointer-events-none absolute right-0 top-1/4 h-96 w-96 rounded-full opacity-20 blur-3xl -z-10"
         style={{ background: "radial-gradient(circle, #ff4fd8 0%, transparent 70%)" }}
       />
       <motion.div
         animate={{ y: [0, 40, 0], scale: [1, 0.9, 1] }}
         transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-        className="pointer-events-none absolute bottom-0 left-1/4 h-64 w-64 rounded-full opacity-10 blur-3xl"
+        className="pointer-events-none absolute bottom-0 left-1/4 h-64 w-64 rounded-full opacity-10 blur-3xl -z-10"
         style={{ background: "radial-gradient(circle, #00ffff 0%, transparent 70%)" }}
       />
 
+      {/* 🛠️ Foreground layer: Added z-10 for complete content containment */}
       <div className="relative z-10 mx-auto max-w-5xl">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 60 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-          className="mb-16 text-center"
+          className="mb-20 text-center"
         >
           <motion.div
             initial={{ scale: 0, rotate: -180 }}
@@ -101,7 +102,7 @@ export function ContactSection() {
             </motion.span>
           </motion.div>
 
-          <span className="font-mono text-xs uppercase tracking-[0.3em] text-muted-foreground">
+          <span className="block font-mono text-xs uppercase tracking-[0.3em] text-muted-foreground">
             Get In Touch
           </span>
 
@@ -141,7 +142,7 @@ export function ContactSection() {
         </motion.div>
 
         {/* Main content grid */}
-        <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
+        <div className="grid gap-16 lg:grid-cols-2 lg:items-start">
           {/* Contact form */}
           <motion.form
             initial={{ opacity: 0, x: -60 }}
@@ -246,7 +247,7 @@ export function ContactSection() {
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -10 }}
-                      className="relative z-10 flex items-center gap-2 text-background"
+                      className="relative z-10 flex items-center gap-2 text-background font-bold"
                     >
                       <motion.span
                         animate={{ rotate: 360 }}
@@ -261,7 +262,7 @@ export function ContactSection() {
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -10 }}
-                      className="relative z-10 flex items-center gap-2 text-background transition-transform group-hover:translate-x-1"
+                      className="relative z-10 flex items-center gap-2 text-background font-bold transition-transform group-hover:translate-x-1"
                     >
                       Send Message
                       <motion.span
@@ -290,14 +291,14 @@ export function ContactSection() {
             transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
             className="space-y-10"
           >
-            {/* Email CTA with hover effect */}
-            <div className="rounded-2xl border border-border/30 bg-secondary/10 p-8 backdrop-blur-sm">
+            {/* Email CTA card */}
+            <div className="rounded-2xl border border-border/30 bg-secondary/5 p-8 backdrop-blur-md relative z-20">
               <span className="mb-2 block font-mono text-xs uppercase tracking-wider text-muted-foreground">
                 Drop me an email
               </span>
               <motion.a
                 href="mailto:hello@example.com"
-                className="group relative inline-block text-2xl font-bold md:text-3xl"
+                className="group relative inline-block text-2xl font-bold md:text-3xl text-foreground transition-colors hover:text-[#ff4fd8]"
                 whileHover={{ x: 5 }}
                 data-magnetic="true"
               >
@@ -324,8 +325,8 @@ export function ContactSection() {
               </div>
             </div>
 
-            {/* Social links with staggered animation */}
-            <div>
+            {/* Social links */}
+            <div className="relative z-20">
               <span className="mb-4 block font-mono text-xs uppercase tracking-wider text-muted-foreground">
                 Follow me
               </span>
@@ -337,19 +338,15 @@ export function ContactSection() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
-                    className="group relative flex items-center gap-3 overflow-hidden rounded-full border border-border/50 px-5 py-3 transition-all duration-300 hover:border-[#ff4fd8]/50"
+                    className="group relative flex items-center gap-3 overflow-hidden rounded-full border border-border/50 bg-background/50 px-5 py-3 transition-all duration-300 hover:border-[#ff4fd8]/50 backdrop-blur-sm"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     data-magnetic="true"
                   >
-                    <motion.span
-                      className="text-muted-foreground transition-colors group-hover:text-[#ff4fd8]"
-                      whileHover={{ rotate: 360 }}
-                      transition={{ duration: 0.5 }}
-                    >
+                    <span className="text-muted-foreground transition-colors group-hover:text-[#ff4fd8]">
                       {social.icon}
-                    </motion.span>
-                    <span className="font-mono text-sm uppercase tracking-wider transition-colors group-hover:text-[#ff4fd8]">
+                    </span>
+                    <span className="font-mono text-sm uppercase tracking-wider text-foreground transition-colors group-hover:text-[#ff4fd8]">
                       {social.name}
                     </span>
                     <motion.div
@@ -368,7 +365,7 @@ export function ContactSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 1 }}
-              className="flex items-center gap-4 rounded-xl border border-border/30 bg-secondary/10 p-4 backdrop-blur-sm"
+              className="flex items-center gap-4 rounded-xl border border-border/30 bg-secondary/5 p-4 backdrop-blur-md relative z-20"
             >
               <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#ff4fd8]/10">
                 <motion.span
@@ -382,7 +379,7 @@ export function ContactSection() {
                 <span className="block font-mono text-xs uppercase tracking-wider text-muted-foreground">
                   Based in
                 </span>
-                <span className="font-medium">San Francisco, CA</span>
+                <span className="font-medium text-foreground">Dhaka, Bangladesh</span>
               </div>
             </motion.div>
           </motion.div>
